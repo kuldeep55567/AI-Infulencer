@@ -15,8 +15,8 @@ AI Influencer is a web application that allows users to login, signup, and chat 
 To get started, clone the AI Influencer repository from GitHub:
 
 ```bash
-git clone <repository_url>
-cd AI-Influencer
+git clone https://github.com/kuldeep55567/AI-Infulencer.git
+cd frontend
 ```
 
 ## Setup
@@ -32,7 +32,7 @@ pip install -r requirements.txt
 3. Set up the frontend environment by navigating to the `angular-app` directory and installing the Angular dependencies:
 
 ```bash
-cd angular-app
+cd frontend
 npm install
 ```
 
