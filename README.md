@@ -16,8 +16,16 @@ To get started, clone the AI Influencer repository from GitHub:
 
 ```bash
 git clone https://github.com/kuldeep55567/AI-Infulencer.git
-
-Direct to the Frontend Folder:
-
-```bash
 cd frontend
+
+
+## Setup
+
+1. Install the required dependencies for the backend (Flask) and the frontend (Angular) separately.
+
+2. Set up the backend environment by installing the required packages. Run the following command inside the root directory:
+```bash
+pip install -r requirements.txt
+
+3. Set up the frontend environment by navigating to the `angular-app` directory and installing the Angular dependencies:
+
