@@ -15,5 +15,5 @@ AI Influencer is a web application that allows users to login, signup, and chat 
 To get started, clone the AI Influencer repository from GitHub:
 
 ```bash
-git clone <repository_url>
-cd AI-Influencer
+git clone [<repository_url>](https://github.com/kuldeep55567/AI-Infulencer.git)https://github.com/kuldeep55567/AI-Infulencer.git
+cd frontend
