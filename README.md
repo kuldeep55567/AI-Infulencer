@@ -1,79 +1,94 @@
-##_**DISCLAIMER**_
-This project has moved maintainers and is no longer developed here. The up to date template can be found [here](https://github.com/rennemannd/MERN-Template).
+# AI Influencer - Angular and Flask Project
 
-#### _**IMPORTANT NOTE**_ - 
-This project does not have a mongoDB connection setup. Setup the connection based on the environments below.
-- local development: create a config file (make sure to name it config.js) in the config folder, which exports your db.uri connection. An example is provided, config/config.example.js. This file will be ignored by git so your db credentials will be kept safe when the app is deployed.
-- production: Since the config file is not pushed when you deploy your app, you must specifiy your db uri in heorku. Set the uri in heroku as specified in [this](https://devcenter.heroku.com/articles/config-vars) resource. Make sure you name the environement variable "DB_URI".
+AI Influencer is a web application that allows users to login, signup, and chat with a chatbot that responds to queries related to parenting. The application also provides users the ability to view their chat history.
 
-## Getting Started
-This repository aims to assist you in beginning work on a MERN stack application with a solid file structure as a foundation. To get started make a copy of this template repo for your project teams.
+## Table of Contents
+- [Clone the Repository](#clone-the-repository)
+- [Setup](#setup)
+- [Environment Variables](#environment-variables)
+- [Accessing the Angular Project](#accessing-the-angular-project)
+- [Backend Routes](#backend-routes)
+- [Deployed Link](#deployed-link)
 
-Since this project will hold both the client application and the server application there will be node modules in two different places. First run `npm install` from the root. After this you will run `npm run-script install-all` from the root. From now on run this command anytime you want to install all modules again. This is a script we have defined in package.json .
+## Clone the Repository
 
-This app can be deployed directly to heroku since there is a script defined in package.json which will automatically handle building and deploying the app. For more information on deploying to heroku reference the extra resources at the bottom of this file. 
+To get started, clone the AI Influencer repository from GitHub:
 
-## File structure
-#### `client` - Holds the client application
-- #### `public` - This holds all of our static files
-- #### `src`
-    - #### `assets` - This folder holds assets such as images, docs, and fonts
-    - #### `components` - This folder holds all of the different components that will make up our views
-    - #### `views` - These represent a unique page on the website i.e. Home or About. These are still normal react components.
-    - #### `App.js` - This is what renders all of our browser routes and different views
-    - #### `index.js` - This is what renders the react app by rendering App.js, should not change
-- #### `package.json` - Defines npm behaviors and packages for the client
-#### `server` - Holds the server application
-- #### `config` - This holds our configuration files, like mongoDB uri
-- #### `controllers` - These hold all of the callback functions that each route will call
-- #### `models` - This holds all of our data models
-- #### `routes` - This holds all of our HTTP to URL path associations for each unique url
-- #### `tests` - This holds all of our server tests that we have defined
-- #### `server.js` - Defines npm behaviors and packages for the client
-#### `package.json` - Defines npm behaviors like the scripts defined in the next section of the README
-#### `.gitignore` - Tells git which files to ignore
-#### `README` - This file!
+```bash
+git clone <repository_url>
+cd AI-Influencer
+```
 
+## Setup
 
-## Available Scripts
+1. Install the required dependencies for the backend (Flask) and the frontend (Angular) separately.
 
-In the project directory, you can run:
+2. Set up the backend environment by installing the required packages. Run the following command inside the root directory:
 
-### `npm run-script dev`
+```bash
+pip install -r requirements.txt
+```
 
-Runs both the client app and the server app in development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
+3. Set up the frontend environment by navigating to the `angular-app` directory and installing the Angular dependencies:
 
-### `npm run-script client`
+```bash
+cd angular-app
+npm install
+```
 
-Runs just the client app in development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
+## Environment Variables
 
+Create a `.env` file in the root directory of the backend and add the following environment variables:
 
-### `npm run-script server`
+```plaintext
+MONGO_URL=<your_mongodb_url>
+OPEN_API_KEY=<your_openai_api_key>
+MONGO_NAME=<your_mongodb_name>
+SECRET_KEY=<your_secret_key>
+```
 
-Runs just the server in development mode.<br>
+Replace `<your_mongodb_url>`, `<your_openai_api_key>`, `<your_mongodb_name>`, and `<your_secret_key>` with your actual values.
 
+## Accessing the Angular Project
 
-### `npm run build`
+To access the Angular project, navigate to the `angular-app` directory and use the following commands:
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+cd angular-app
+ng serve
+```
 
-If deploying to heroku this does not need to be run since it is handled by the heroku-postbuild script<br>
+The Angular application will be available at `http://localhost:4200/` in your web browser.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Backend Routes
 
-## Learn More
+The backend (Flask) provides the following routes:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. `GET /`
+   - Returns a welcome message for the backend.
 
-To learn how to setup a local MongoDB instance for testing, check out how to [Connect to MongoDB](https://docs.mongodb.com/guides/server/drivers/).
+2. `GET /protected`
+   - Requires authentication with a valid JWT token. Returns a protected route message along with the user's name.
 
-To learn how to deploy a full-stack web app to heroku, check out [this great guide](https://daveceddia.com/deploy-react-express-app-heroku/).
+3. `GET /users`
+   - Returns a list of all users with their information and chat history.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. `GET /queries`
+   - Requires authentication with a valid JWT token. Returns the chat history of the logged-in user.
 
-### `npm run build` fails to minify
+5. `POST /signup`
+   - Allows a user to sign up by providing their name, email, password, and optional queries.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+6. `POST /login`
+   - Allows a user to log in with their email and password. Returns an access token on successful login.
+
+7. `POST /answer`
+   - Requires authentication with a valid JWT token. Accepts a question from the user and responds with a short and precise answer from the chatbot.
+
+## Deployed Link
+
+[https://64bd539befc13a3bf88a5fb1--storied-licorice-17a916.netlify.app]
+
+```
+
+You can copy and paste this content directly into your README.md file. Don't forget to replace `<repository_url>` with your actual GitHub repository URL and add your deployed link in the "Deployed Link" section.
