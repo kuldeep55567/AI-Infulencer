@@ -1,0 +1,18 @@
+<nav class="navbar">
+    <div class="logo">
+      <img src="https://uploads-ssl.webflow.com/6296e33cec85c440e34659c4/638637707b7500133c7a3e64_Top%20Nav%20-%20Logo.png" alt="Error-404">
+      <ul class="nav-links" [class.nav-active]="showMenu">
+          <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+          <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+          <li><a routerLink="/contact" routerLinkActive="active">Podcast</a></li>
+          <li><a routerLink="/contact" routerLinkActive="active">Blogs</a></li>
+          <li><button routerLink="/login" routerLinkActive="active">Login/Signup</button></li>
+        </ul>
+    </div>
+    <div class="burger" (click)="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+  

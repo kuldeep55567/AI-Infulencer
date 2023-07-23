@@ -1,0 +1,17 @@
+<div class="container">
+    <h2>Query History</h2>
+    <div id="main">
+    <ul *ngIf="queries.length > 0" class="custom-bullets">
+      <li *ngFor="let query of queries" type="number">
+        <strong>Question:</strong> {{ query.question }}
+        <br />
+        <strong>Answer:</strong> {{ query.answer }}
+        <hr />
+      </li>
+    </ul>
+  </div>
+    <div *ngIf="queries.length === 0">
+      <p id="query">No queries found...</p>
+    </div>
+  </div>
+  

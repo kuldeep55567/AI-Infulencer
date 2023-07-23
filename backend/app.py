@@ -21,7 +21,7 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = datetime.timedelta(hours=24)
 jwt = JWTManager(app)
 connection = Connection()
 connection.connect_to_db()
-base_prompt = "Act as a parenting influencer and respond to questions given by parents about their children. The response that you give should follow some of the rules. The name of the parent who is asking the question is given before asking every question in the format of {parent_name}, question.......Never use points to give answers, always give them in paragraphs only. Reply in the same language in which the parent is asking a question.Your Answers should be short and precise but should not look like AI.If the age of the Child is not given then ask clarifying questions such as, Hello {name of parent} Can you provide me your child's age, as it will help me know your child better? "
+base_prompt = "Consider youself a parenting expert and response to parents query but before answering make sure to ask child's age and extra inforamtion if not provided by parent but ask in very short manner, no long texts. Before every query parent name is always given use that name to greet the parent first. and most important answer should be short and precise and in the same language in which parent is asking question. Always give answer in paragraph only, and you answer should contain emotion and attachment to parent question."
 # first_filter = "Check these few pointers. Name of parent is given, use it to greet them before answering. If child age is not provided ask him to give child age like this. Heyy {parent_name} can you provide me child name, it will help me to understand your concern better. If you are not sure of what to answer , ask the parent to ask the question widely"
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -101,12 +101,18 @@ def login():
 @jwt_required()
 def answer():
     current_user_id = get_jwt_identity()
+    user = User.objects(id=current_user_id).first()
     question = request.get_json().get("question")
+    chat_history = user.queries if hasattr(user, "queries") else []
+    chat_history.append({"question": question})
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": base_prompt},
-            {"role": "user", "content": f"{user.name}{question}"},
+            *[
+                {"role": "user", "content": f"{user.name}{entry['question']}"}
+                for entry in chat_history
+            ],
         ],
         temperature=1.18,
         max_tokens=128,
@@ -114,17 +120,11 @@ def answer():
         frequency_penalty=0,
         presence_penalty=0,
     )
-    qa_entry = {
-        "question": question,
-        "answer": response.choices[0].message.get("content", ""),
-    }
-    try:
-        user = User.objects(id=current_user_id).first()
-        user.queries.append(qa_entry)
-        user.save()
-        return jsonify({"answer": response.choices[0].message.get("content", "")})
-    except Exception as e:
-        return jsonify({"'error": str(e)}), 500
+    model_reply = response.choices[0].message.get("content", "")
+    chat_history[-1]["answer"] = model_reply
+    user.queries = chat_history
+    user.save()
+    return jsonify({"answer": model_reply})
 
 
 if __name__ == "__main__":

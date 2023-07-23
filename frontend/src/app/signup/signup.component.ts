@@ -11,16 +11,15 @@ export class SignupComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   signup() {
     this.authService.signup(this.name, this.email, this.password).subscribe(
       (response) => {
-        // Handle successful signup here
+        alert("Registered Successfully")
         console.log(response);
       },
       (error) => {
-        // Handle signup error here
         console.error(error);
       }
     );

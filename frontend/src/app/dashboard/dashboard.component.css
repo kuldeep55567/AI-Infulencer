@@ -1,0 +1,31 @@
+h2{
+    font-size: 40px;
+    text-align: center;
+    margin-top: 0px;
+    padding-top: 40px;
+}
+.container{
+    background-image: linear-gradient(rgba(255, 55, 0, .2), rgba(252, 233, 255, .8));
+}
+ul {
+    list-style-type:lower-roman;
+    line-height: 2.5rem;
+}
+ul li{
+    font-size: 20px;
+    color: rgb(61, 61, 61);
+    padding: 20px 0px 20px 0px;
+}
+#main{
+    width: 80%;
+    margin: auto;
+}
+strong{
+    font-size: 22px;
+    color: rgb(55, 142, 223);
+}
+#query{
+text-align: center;    
+font-size: 25px;
+margin-top: 5vh;
+}

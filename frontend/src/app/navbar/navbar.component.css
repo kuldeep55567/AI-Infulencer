@@ -1,0 +1,98 @@
+/* Basic styling for the navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  }
+  button:hover{
+    cursor: pointer;
+  }
+.logo{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+  .nav-links {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .nav-links li {
+    list-style: none;
+  }
+  .nav-links button{
+    background-color: #ef6667;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 0;
+    margin-left: 15px;
+    padding: 12px 24px;
+    font-size: 20px;
+    color: white;
+  }
+  .nav-links a {
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 20px;
+  }
+  
+  .nav-links a:hover {
+    background-color: #555;
+  }
+  
+  @media (max-width: 768px) {
+    .nav-links {
+      position: absolute;
+      right: 0;
+      height: 92vh;
+      top: 8vh;
+      background-color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 50%;
+      transform: translateX(100%);
+      transition: transform 0.5s ease-in;
+    }
+  
+    .nav-links.nav-active {
+      transform: translateX(0);
+    }
+  
+    .nav-links li {
+      opacity: 0;
+    }
+  
+    .nav-links li a {
+      font-size: 18px;
+      padding: 10px;
+      width: 100%;
+    }
+  
+    .burger {
+      display: block;
+      cursor: pointer;
+    }
+  
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 5px;
+      transition: all 0.3s ease;
+    }
+  
+    .burger.nav-active div {
+      background-color: #333;
+    }
+  }
+  

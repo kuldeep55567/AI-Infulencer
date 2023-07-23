@@ -17,6 +17,7 @@ export class LoginComponent {
       (response) => {
         localStorage.setItem('token', response.token);
         console.log(response);
+        alert("Login Successfully")
       },
       (error) => {
         console.error(error);

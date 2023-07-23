@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,9 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http.post<any>(`${this.baseUrl}/login`, { email, password });
+  }
+  getQueries(headers:HttpHeaders) {
+    return this.http.get<any>(`${this.baseUrl}/queries`);
   }
   getToken(): string | null {
     return localStorage.getItem('token');
